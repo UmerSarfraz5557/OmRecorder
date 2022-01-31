@@ -47,13 +47,17 @@ public interface AudioChunk {
     @Override public double maxAmplitude() {
       short[] shorts = toShorts();
       int nMaxAmp = 0;
-      int arrLen = shorts.length;
-      int peakIndex;
-      for (peakIndex = 0; peakIndex < arrLen; peakIndex++) {
-        if (shorts[peakIndex] >= nMaxAmp) {
-          nMaxAmp = shorts[peakIndex];
-        }
+      if(shorts.length > 0){
+        nMaxAmp = shorts[shorts.length -1];
       }
+
+//      int arrLen = shorts.length;
+//      int peakIndex;
+//      for (peakIndex = 0; peakIndex < arrLen; peakIndex++) {
+//        if (shorts[peakIndex] >= nMaxAmp) {
+//          nMaxAmp = shorts[peakIndex];
+//        }
+//      }
       return (int) (20 * Math.log10(nMaxAmp / REFERENCE));
     }
 
